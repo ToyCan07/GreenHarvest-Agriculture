@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenHarvest Agriculture</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==================== LOGIN SCREEN ==================== -->
+    <div id="loginScreen">
+        <div class="login-box">
+            <h2>🌾 Welcome</h2>
+            <p style="margin-bottom: 20px; color: #555;">Please login to access GreenHarvest</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="loginUsername" placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter password">
+                    <div id="loginPwdError" class="error-msg">Password must be at least 6 characters.</div>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Login to Website</button>
+            </form>
+            <p style="margin-top: 15px; font-size: 0.9rem;">
+                Don't have an account?
+                <a href="#" onclick="openModal('registerModal')"
+                    style="color: var(--primary-color); font-weight: bold;">Register Here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <div id="mainContent">
+
+        <!-- HEADER -->
+        <header>
+            <div class="header-left">
+                <a href="#home" class="logo">🌾 GreenHarvest</a>
+                <nav>
+                    <ul>
+                        <li><a href="#" onclick="showPage('home'); return false;">Home</a></li>
+                        <li><a href="#" onclick="showPage('subsidies'); return false;">Subsidies</a></li>
+                        <li><a href="#" onclick="showPage('about'); return false;">About</a></li>
+                        <li><a href="#" onclick="showPage('services'); return false;">Services</a></li>
+                        <li><a href="#" onclick="showPage('products'); return false;">Products</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="header-right">
+                <button class="header-btn" onclick="openModal('cartModal')">
+                    🛒 Cart (<span id="cartCount">0</span>)
+                </button>
+                <button class="header-btn" onclick="openModal('contactModal')">Contact Us</button>
+                <button class="header-btn" onclick="logout()"
+                    style="border-color: #ffcccc; color: #ffcccc;">Logout</button>
+            </div>
+        </header>
+
+        <!-- HOME SECTION -->
+        <section id="home">
+            <div class="home-content">
+                <h1>Empowering Modern Farming</h1>
+                <p>Your complete agricultural partner. From sustainable crop management to modern farming technologies,
+                    we help your yields grow.</p>
+            </div>
+        </section>
+
+        <!-- SUBSIDIES SECTION -->
+        <section id="subsidies" style="background-color: #e8f5e9;">
+            <h2 class="section-title">Government Schemes & Subsidies</h2>
+            <div class="schemes-accordion">
+
+                <!-- PM-KISAN -->
+                <div class="scheme-card-acc">
+                    <button class="scheme-title-acc">
+                        <div class="icon-title-wrap">
+                            <span class="icon">📜</span>
+                            <span>PM-KISAN Yojana</span>
+                        </div>
+                        <span class="acc-icon">+</span>
+                    </button>
+                    <div class="scheme-details-acc">
+                        <div class="details-content">
+                            <p>Financial assistance of ₹6,000 per year for small and marginal farmers, provided in 3
+                                equal installments.</p>
+                            <div class="req-docs">
+                                <strong>Required Documents:</strong>
+                                <ul>
+                                    <li>Aadhar Card</li>
+                                    <li>Land Ownership Records (Khatauni / 7/12)</li>
+                                    <li>Bank Account Passbook (Aadhar Linked)</li>
+                                </ul>
+                            </div>
+                            <button class="btn" style="margin-top: 10px; padding: 8px 15px; font-size: 1rem;"
+                                onclick="applySubsidy('PM-KISAN Samman Nidhi')">Check Eligibility & Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PM-KUSUM -->
+                <div class="scheme-card-acc">
+                    <button class="scheme-title-acc">
+                        <div class="icon-title-wrap">
+                            <span class="icon">☀️</span>
+                            <span>PM-KUSUM (Solar Pumps)</span>
+                        </div>
+                        <span class="acc-icon">+</span>
+                    </button>
+                    <div class="scheme-details-acc">
+                        <div class="details-content">
+                            <p>Get up to 60% subsidy on installing solar water pumps for irrigation. This helps reduce
+                                reliance on grid electricity and diesel.</p>
+                            <div class="req-docs">
+                                <strong>Required Documents:</strong>
+                                <ul>
+                                    <li>Aadhar Card & Passport Size Photo</li>
+                                    <li>Land Records (Jamabandi / 7/12 Extract)</li>
+                                    <li>Bank Passbook Copy</li>
+                                    <li>Declaration of no existing electric connection</li>
+                                </ul>
+                            </div>
+                            <button class="btn" style="margin-top: 10px; padding: 8px 15px; font-size: 1rem;"
+                                onclick="applySubsidy('PM-KUSUM Solar Pump Scheme')">Check Eligibility &
+                                Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agri-Machinery -->
+                <div class="scheme-card-acc">
+                    <button class="scheme-title-acc">
+                        <div class="icon-title-wrap">
+                            <span class="icon">⚙️</span>
+                            <span>Agri-Machinery Subsidy</span>
+                        </div>
+                        <span class="acc-icon">+</span>
+                    </button>
+                    <div class="scheme-details-acc">
+                        <div class="details-content">
+                            <p>Up to 50-80% subsidy on buying new tractors, rotavators, and other modern farming
+                                equipment to promote agricultural mechanization.</p>
+                            <div class="req-docs">
+                                <strong>Required Documents:</strong>
+                                <ul>
+                                    <li>Aadhar Card & PAN Card</li>
+                                    <li>Quotation/Bill of the Machinery</li>
+                                    <li>Caste Certificate (If applicable for extra subsidy)</li>
+                                    <li>Bank Details & Land Records</li>
+                                </ul>
+                            </div>
+                            <button class="btn" style="margin-top: 10px; padding: 8px 15px; font-size: 1rem;"
+                                onclick="applySubsidy('Agricultural Mechanization Subsidy')">Check Eligibility &
+                                Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Farmer in field">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Green field at sunset">
+                    <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Fresh crops">
+                </div>
+                <div class="about-text">
+                    <h3>Cultivating a Better Tomorrow, Together</h3>
+                    <p><strong>What it is:</strong> GreenHarvest is a pioneering digital agriculture platform dedicated
+                        to revolutionizing the farming industry. Born from a deep respect for the land and the people
+                        who work it, our platform serves as a comprehensive ecosystem where traditional knowledge meets
+                        cutting-edge technology.</p>
+                    <p><strong>Who it is for:</strong> Our community is built for everyone involved in the agricultural
+                        supply chain. Whether you are a small-scale local farmer tending to a few acres, or a commercial
+                        enterprise, GreenHarvest provides the resources and support you need to thrive.</p>
+                    <p><strong>Why it is useful:</strong> By offering expert crop advisory, accessible heavy equipment
+                        rentals, and real-time market price tracking, we empower you to make data-driven decisions. Our
+                        goal is to help you maximize your profitability while maintaining sustainable farming
+                        practices.</p>
+                </div>
+            </div>
+            <div class="mission-content">
+                <div class="mission-image">
+                    <img src="https://images.unsplash.com/photo-1495107334309-fcf20504a5ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Growing plant">
+                </div>
+                <div class="about-text">
+                    <h4>Our Mission</h4>
+                    <p>To empower farmers globally by providing accessible technology, fair market insights, and
+                        sustainable farming solutions.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES SECTION -->
+        <section id="services">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div>
+                        <span class="icon">🌱</span>
+                        <h3>Crop Advisory</h3>
+                        <p>Get expert advice on soil health and planting.</p>
+                    </div>
+                    <button class="btn" style="margin-top: 15px;"
+                        onclick="showServiceDetails('Crop Advisory', 'Our Crop Advisory service connects you with seasoned agronomists. We provide detailed soil testing and climate-specific seed recommendations to maximize your yield.')">Learn
+                        More</button>
+                </div>
+                <div class="service-card">
+                    <div>
+                        <span class="icon">🚜</span>
+                        <h3>Equipment Rental</h3>
+                        <p>Access modern, heavy-duty farming machinery.</p>
+                    </div>
+                    <button class="btn" style="margin-top: 15px;"
+                        onclick="showServiceDetails('Equipment Rental', 'Why buy expensive machinery when you can rent it? We offer a wide range of well-maintained tractors, harvesters, and seeders on hourly, daily, or weekly bases.')">Learn
+                        More</button>
+                </div>
+                <div class="service-card">
+                    <div>
+                        <span class="icon">📈</span>
+                        <h3>Market Price Tracker</h3>
+                        <p>Stay updated with real-time market prices.</p>
+                    </div>
+                    <button class="btn" style="margin-top: 15px;"
+                        onclick="showServiceDetails('Market Price Tracker', 'Never sell your harvest at a loss again. Our digital tracker gives you live updates on crop and livestock prices across local and national mandis (markets).')">Learn
+                        More</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCTS SECTION -->
+        <section id="products">
+            <h2 class="section-title">Our Products & Machines</h2>
+            <div style="text-align: center; margin-bottom: 30px;">
+                <button class="btn"
+                    onclick="openModal('sellProductModal')"
+                    style="background-color: var(--star-color); color: #fff; font-size: 1.1rem; padding: 12px 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 30px;">
+                    👨‍🌾 Sell Your Product
+                </button>
+                <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">Are you a farmer? List your product
+                    directly on our platform!</p>
+            </div>
+            <div class="services-grid" id="productsGrid">
+                <div class="service-card">
+                    <div><span class="icon">🍅</span>
+                        <h3>Organic Tomatoes</h3>
+                        <p>Fresh, pesticide-free tomatoes.</p>
+                        <div class="rating">★★★★★ <span>(4.9)</span></div>
+                        <div class="price">₹60 / kg</div>
+                    </div>
+                    <button class="btn" onclick="addToCart('Organic Tomatoes', 60, this)">Add to Cart</button>
+                </div>
+                <div class="service-card">
+                    <div><span class="icon">🌾</span>
+                        <h3>Premium Wheat</h3>
+                        <p>High-quality wheat grains.</p>
+                        <div class="rating">★★★★☆ <span>(4.2)</span></div>
+                        <div class="price">₹45 / kg</div>
+                    </div>
+                    <button class="btn" onclick="addToCart('Premium Wheat', 45, this)">Add to Cart</button>
+                </div>
+                <div class="service-card">
+                    <div><span class="icon">🌻</span>
+                        <h3>Sunflower Seeds</h3>
+                        <p>High-yield seeds for planting.</p>
+                        <div class="rating">★★★★★ <span>(4.8)</span></div>
+                        <div class="price">₹600 / pkt</div>
+                    </div>
+                    <button class="btn" onclick="addToCart('Sunflower Seeds', 600, this)">Add to Cart</button>
+                </div>
+                <div class="service-card">
+                    <div><span class="icon">🍚</span>
+                        <h3>Basmati Rice</h3>
+                        <p>Aromatic, long-grain basmati rice.</p>
+                        <div class="rating">★★★★★ <span>(5.0)</span></div>
+                        <div class="price">₹140 / kg</div>
+                    </div>
+                    <button class="btn" onclick="addToCart('Basmati Rice', 140, this)">Add to Cart</button>
+                </div>
+                <div class="service-card">
+                    <div><span class="icon">🌿</span>
+                        <h3>Organic Turmeric</h3>
+                        <p>Pure, farm-ground turmeric powder.</p>
+                        <div class="rating">★★★★☆ <span>(4.5)</span></div>
+                        <div class="price">₹300 / kg</div>
+                    </div>
+                    <button class="btn" onclick="addToCart('Organic Turmeric', 300, this)">Add to Cart</button>
+                </div>
+                <div class="service-card">
+                    <div><span class="icon">🌱</span>
+                        <h3>Neem Fertilizer</h3>
+                        <p>100% natural organic fertilizer.</p>
+                        <div class="rating">★★★★★ <span>(4.7)</span></div>
+                        <div class="price">₹450 / bag</div>
+                    </div>
+                    <button class="btn" onclick="addToCart('Neem Fertilizer', 450, this)">Add to Cart</button>
+                </div>
+                <div class="service-card">
+                    <div><span class="icon">🥔</span>
+                        <h3>Fresh Potatoes</h3>
+                        <p>Locally grown, large potatoes.</p>
+                        <div class="rating">★★★★☆ <span>(4.1)</span></div>
+                        <div class="price">₹35 / kg</div>
+                    </div>
+                    <button class="btn" onclick="addToCart('Fresh Potatoes', 35, this)">Add to Cart</button>
+                </div>
+                <div class="service-card">
+                    <div><span class="icon">💮</span>
+                        <h3>Cotton Seeds</h3>
+                        <p>Premium grade cotton crop seeds.</p>
+                        <div class="rating">★★★★★ <span>(4.6)</span></div>
+                        <div class="price">₹900 / pkt</div>
+                    </div>
+                    <button class="btn" onclick="addToCart('Cotton Seeds', 900, this)">Add to Cart</button>
+                </div>
+                <div class="service-card">
+                    <div><span class="icon">🚜</span>
+                        <h3>Mini Tractor (Rent)</h3>
+                        <p>24HP Tractor, perfect for small farms.</p>
+                        <div class="rating">★★★★★ <span>(4.9)</span></div>
+                        <div class="price">₹700 / hr</div>
+                    </div>
+                    <button class="btn" onclick="addToCart('Mini Tractor (1 hr Rent)', 700, this)">Add to Cart</button>
+                </div>
+                <div class="service-card">
+                    <div><span class="icon">💦</span>
+                        <h3>Water Pump (2HP)</h3>
+                        <p>Electric pump for field irrigation.</p>
+                        <div class="rating">★★★★☆ <span>(4.3)</span></div>
+                        <div class="price">₹7500 / unit</div>
+                    </div>
+                    <button class="btn" onclick="addToCart('Water Pump 2HP', 7500, this)">Add to Cart</button>
+                </div>
+                <div class="service-card">
+                    <div><span class="icon">⚙️</span>
+                        <h3>Manual Seeder</h3>
+                        <p>Push-seeder for quick row planting.</p>
+                        <div class="rating">★★★★★ <span>(4.8)</span></div>
+                        <div class="price">₹1800 / unit</div>
+                    </div>
+                    <button class="btn" onclick="addToCart('Manual Seeder', 1800, this)">Add to Cart</button>
+                </div>
+                <div class="service-card">
+                    <div><span class="icon">🎒</span>
+                        <h3>Knapsack Sprayer</h3>
+                        <p>16L manual back-sprayer for fertilizers.</p>
+                        <div class="rating">★★★★★ <span>(4.7)</span></div>
+                        <div class="price">₹1500 / unit</div>
+                    </div>
+                    <button class="btn" onclick="addToCart('Knapsack Sprayer', 1500, this)">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STATS SECTION -->
+        <section id="stats"
+            style="background-color: var(--primary-color); color: var(--white); padding: 60px 5%; min-height: auto;">
+            <div style="display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; text-align: center;">
+                <div class="stat-box" style="margin: 20px;">
+                    <div style="font-size: 3.5rem; margin-bottom: 10px; font-weight: bold;">
+                        <span class="counter" data-target="15243">0</span>+
+                    </div>
+                    <p style="font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px;">Active Users</p>
+                </div>
+                <div class="stat-box" style="margin: 20px;">
+                    <div style="font-size: 3.5rem; margin-bottom: 10px; font-weight: bold;">
+                        <span class="counter" data-target="10000">0</span>+
+                    </div>
+                    <p style="font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px;">Satisfied Farmers</p>
+                </div>
+                <div class="stat-box" style="margin: 20px;">
+                    <div style="font-size: 3.5rem; margin-bottom: 10px; font-weight: bold;">
+                        <span class="counter" data-target="4500">0</span>+
+                    </div>
+                    <p style="font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px;">Products Sold</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>🌾 GreenHarvest</h3>
+                    <p>Empowering farmers with modern tools, real-time market data, and expert crop advisory. Join us
+                        in cultivating a sustainable future.</p>
+                    <div class="social-icons">
+                        <a href="#">fb</a>
+                        <a href="#">tw</a>
+                        <a href="#">in</a>
+                        <a href="#">ig</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#" onclick="showPage('home'); return false;">Home</a></li>
+                        <li><a href="#" onclick="showPage('subsidies'); return false;">Government Schemes</a></li>
+                        <li><a href="#" onclick="showPage('about'); return false;">About Us</a></li>
+                        <li><a href="#" onclick="showPage('services'); return false;">Our Services</a></li>
+                        <li><a href="#" onclick="showPage('products'); return false;">Marketplace</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li>📍 123 Agri-Tech Park, New Delhi, India</li>
+                        <li>📞 +91 98765 43210</li>
+                        <li>✉️ support@greenharvest.in</li>
+                        <li>🕒 Mon - Sat: 9:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get the latest mandi prices and farming tips directly to your inbox.</p>
+                    <form class="newsletter-form"
+                        onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                        <input type="email" placeholder="Your Email Address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 GreenHarvest Agriculture. All rights reserved. Designed for Farmers.</p>
+            </div>
+        </footer>
+
+    </div><!-- end #mainContent -->
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- Service Modal -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('serviceModal')">&times;</span>
+            <h2 id="serviceModalTitle" class="section-title" style="margin-bottom: 1rem; font-size: 2rem;">Service Name</h2>
+            <p id="serviceModalDesc" style="font-size: 1.1rem; line-height: 1.6; text-align: center; color: var(--text-dark);"></p>
+            <button class="btn" style="width: 100%; margin-top: 25px;" onclick="closeModal('serviceModal')">Close</button>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('cartModal')">&times;</span>
+            <h2 class="section-title" style="margin-bottom: 1rem;"><span id="cartUserName">Your</span> Cart</h2>
+            <div id="cartItemsContainer">
+                <p>Your cart is empty.</p>
+            </div>
+            <div class="cart-total-box">Total: ₹<span id="cartTotalAmount">0</span></div>
+            <button class="btn" style="width: 100%; margin-top: 20px;" onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="close-btn" onclick="closeModal('checkoutModal')">&times;</span>
+            <h2 class="section-title" style="font-size: 1.5rem; margin-bottom: 1rem;">Checkout & Payment</h2>
+            <div style="background-color: #f1f8e9; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                <h3 style="color: var(--primary-color); margin-bottom: 10px;">Order Summary</h3>
+                <p><strong>Total Amount to Pay: </strong>₹<span id="checkoutTotalAmount">0</span></p>
+            </div>
+            <form id="paymentForm">
+                <div class="form-group">
+                    <label style="font-weight: bold; font-size: 1.1rem; color: var(--primary-color); border-bottom: 2px solid var(--star-color); padding-bottom: 5px; display: inline-block;">
+                        Select Payment Method
+                    </label>
+                    <div style="margin-top: 15px; display: flex; flex-direction: column; gap: 12px;">
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            <input type="radio" name="paymentMethod" value="UPI">
+                            <span>📱 UPI (Google Pay / PhonePe)</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            <input type="radio" name="paymentMethod" value="Card">
+                            <span>💳 Debit / Credit Card</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            <input type="radio" name="paymentMethod" value="NetBanking">
+                            <span>🏦 Net Banking</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+                            <input type="radio" name="paymentMethod" value="COD">
+                            <span>💵 Cash on Delivery (COD)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 20px;">
+                    <label>Delivery Address</label>
+                    <textarea id="deliveryAddress" rows="3" placeholder="Enter your full delivery address"
+                        required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 15px;">Confirm Order & Pay</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
+            <h2 class="section-title" style="margin-bottom: 1rem;">Contact Us</h2>
+            <form id="contactForm">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="contactName" placeholder="Your name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" id="contactEmail" placeholder="Your email">
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea id="contactMessage" rows="4" placeholder="Your message"></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Submit Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('registerModal')">&times;</span>
+            <h2 class="section-title" style="margin-bottom: 1rem;">Register</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="regName" placeholder="Enter full name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" id="regEmail" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="regPassword" placeholder="Create password">
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" id="regConfirm" placeholder="Confirm password">
+                    <div id="regMatchError" class="error-msg">Passwords do not match.</div>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Subsidy Eligibility Modal -->
+    <div id="subsidyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('subsidyModal')">&times;</span>
+            <h2 class="section-title" style="font-size: 1.5rem; margin-bottom: 1rem;">Check Eligibility</h2>
+            <p id="subsidySchemeName"
+                style="text-align: center; color: var(--primary-color); font-weight: bold; margin-bottom: 1rem;"></p>
+            <form id="subsidyForm">
+                <div class="form-group">
+                    <label>Farmer Name</label>
+                    <input type="text" id="subName" required placeholder="Full Name as per Aadhar">
+                </div>
+                <div class="form-group">
+                    <label>Aadhar Number</label>
+                    <input type="text" id="subAadhar" required placeholder="12-digit Aadhar No." pattern="\d{12}"
+                        title="Must be exactly 12 digits">
+                </div>
+                <div class="form-group">
+                    <label>Land Size (in Acres)</label>
+                    <input type="number" id="subLand" required placeholder="e.g. 2.5" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label>Annual Income (₹)</label>
+                    <input type="number" id="subIncome" required placeholder="e.g. 150000">
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Verify Eligibility &
+                    Apply</button>
+            </form>
+            <div id="subsidyResult"
+                style="display: none; text-align: center; margin-top: 15px; padding: 15px; border-radius: 5px;"></div>
+        </div>
+    </div>
+
+    <!-- Sell Product Modal -->
+    <div id="sellProductModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('sellProductModal')">&times;</span>
+            <h2 class="section-title" style="margin-bottom: 1rem;">Sell Your Product</h2>
+            <form id="sellProductForm">
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" id="sellProdName" required placeholder="e.g. Organic Potatoes">
+                </div>
+                <div class="form-group">
+                    <label>Category Icon (Emoji)</label>
+                    <input type="text" id="sellProdIcon" required placeholder="e.g. 🥔" value="🌾">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" id="sellProdDesc" required placeholder="Short description">
+                </div>
+                <div class="form-group">
+                    <label>Price (₹)</label>
+                    <input type="number" id="sellProdPrice" required placeholder="Price per unit (e.g. 50)">
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">List Product</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== SERVICE DETAIL PAGE ==================== -->
+    <div id="serviceDetailPage">
+        <div class="detail-container">
+            <button class="btn back-btn" onclick="closeServiceDetail()">← Back to Services</button>
+            <div class="detail-header">
+                <div class="detail-image">
+                    <img id="detailImg" src="" alt="Service Image">
+                </div>
+                <div class="detail-info">
+                    <h2 id="detailTitle">Service Title</h2>
+                    <p id="detailDescription">Detailed description goes here...</p>
+                    <div class="req-docs">
+                        <strong>Why choose this service?</strong>
+                        <ul id="detailFeatures"></ul>
+                    </div>
+                    <button class="btn" style="margin-top: 20px;">Book This Service Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External JS -->
+    <script src="script.js"></script>
+
+</body>
+</html>
